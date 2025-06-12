@@ -1,0 +1,114 @@
+### 1. Create a new user (with all required fields)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 25,
+  "phoneNumber": "1234567890"
+}
+
+### 2. Create user with validation errors (to test validation)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "A",
+  "email": "invalid-email",
+  "age": 0,
+  "phoneNumber": "123"
+}
+
+### 3. Create user with duplicate email (to test business logic)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Jane Smith",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "phoneNumber": "9876543210"
+}
+
+### 4. Get all users
+GET http://localhost:8080/api/users
+
+### 5. Get user by ID
+GET http://localhost:8080/api/users/1
+
+### 6. Get user by non-existent ID
+GET http://localhost:8080/api/users/999
+
+### 7. Get user by email
+GET http://localhost:8080/api/users/email/john.doe@example.com
+
+### 8. Get user by name
+GET http://localhost:8080/api/users/name/John Doe
+
+### 9. Update user - partial update (only name and age)
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "age": 26
+}
+
+### 10. Update user - single field (only email)
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "email": "john.updated@example.com"
+}
+
+### 11. Update user - all fields
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "name": "John Completely Updated",
+  "email": "john.complete@example.com",
+  "age": 28,
+  "phoneNumber": "+1234567890"
+}
+
+### 12. Update user with validation errors
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "invalid-email-format",
+  "age": -5
+}
+
+### 13. Update non-existent user
+PUT http://localhost:8080/api/users/999
+Content-Type: application/json
+
+{
+  "name": "Non Existent User"
+}
+
+### 14. Check if email is taken
+GET http://localhost:8080/api/users/check-email/john.doe@example.com
+
+### 15. Check if email is available
+GET http://localhost:8080/api/users/check-email/available@example.com
+
+### 16. Check if user exists
+GET http://localhost:8080/api/users/exists/1
+
+### 17. Check if user doesn't exist
+GET http://localhost:8080/api/users/exists/999
+
+### 18. Get user count
+GET http://localhost:8080/api/users/count
+
+### 19. Delete user
+DELETE http://localhost:8080/api/users/1
+
+### 20. Delete non-existent user
+DELETE http://localhost:8080/api/users/999
